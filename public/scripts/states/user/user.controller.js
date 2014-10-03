@@ -5,24 +5,26 @@
     .module('coindropApp')
     .controller('UserController', UserController);
     /* @inject */
-    function UserController ($scope, userService, $state) {
+    function UserController ($scope, userService, $state, $storage) {
       $scope.data = {};
+      var userId = $storage.getObject('current_user')._id;
 
-      // $scope.transactions = userService.getData();
-      
-      $scope.chooseThisTrans = function (id) {
-        console.log('CHOSE THIS ID IN USER CONTROLLER:', id);
-        $state.go('user.transaction', {id: id});
-        // userService.chooseThisTrans(this.transaction); dont need now
+      $scope.chooseThisDeal = function (id) {
+        // userService.chooseThisDeal(this.deal)
+        console.log('CHOOSE THIS DEAL ID:', id);
+        $state.go('user.deal', {id: id});
       };
 
-      ($scope.getAllTransactions = function() {
-        userService.getAllTransactions()
-        .then(function(transactions) {
-          $scope.data.transactions = transactions.data;
+      //immediately get all deals of a specific user upon signup or login
+      $scope.getAllDeals = function(userId) {
+        userService.getAllDeals(userId)
+        .then(function(deals) {
+          $scope.data.buying = deals.data.buying;
+          $scope.data.selling = deals.data.selling;
         });
-      })();
-      
+      };
+      $scope.getAllDeals(userId);
+
     }
 
 }).call(this);
