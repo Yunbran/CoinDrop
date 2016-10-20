@@ -4,18 +4,17 @@
     .module('coindropApp')
     .factory('dealNewService', dealNewService);
   /* @inject */
-  function dealNewService($http){
+  function dealNewService($http) {
     return {
-      makeDeal: makeDeal
+      createDeal:createDeal
     };
-    function makeDeal(dealNew) {
+
+    function createDeal(dealNew) {
+      console.log("BEGIN MAKEDEAL - (dealNew): ", dealNew);
       return $http({
         method: 'POST',
         url: 'api/deals/new',
         data: dealNew
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     }
   }

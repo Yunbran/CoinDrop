@@ -4,48 +4,31 @@
     .module('coindropApp')
     .factory('userService', userService);
     /* @inject */
-    function userService ($http){
+    function userService ($http, $storage){
 
       return {
-        chooseThisTrans: chooseThisTrans,
-        getAllTransactions: getAllTransactions,
-        getOneTrans: getOneTrans,
-        findData: findData
+        getAllDeals: getAllDeals,
+        getOneDeal: getOneDeal
       };
-      function chooseThisTrans (transaction) {
+
+      function getAllDeals (userId) {
         return $http({
           method: 'GET',
-          url: 'api/transactions'
+          url: 'api/users/' + userId + '/deals'
         })
-        .then(function (resp) {
-          return resp;
+        .catch(function(err) {
+          return err;
         });
       }
-
-      function getAllTransactions () {
+      function getOneDeal(dealId) {
         return $http({
           method: 'GET',
-          url: 'api/transactions'
+          url: 'api/deals/' + dealId
         })
-        .then(function(resp) {
-          console.log('INSIDE GET ALL TRANS');
-          return resp;
+        .catch(function(err) {
+          return err;
         });
       }
-      function getOneTrans(transactionId) {        
-        return $http({
-          method: 'GET',
-          url: 'api/transactions/'+transactionId
-        })
-        .then(function (resp) {
-          return resp;
-        });
-      }
-
-      function findData(id){
-        return _.find(data, {_id: id});
-      }
-
     }
 
 }).call(this);
