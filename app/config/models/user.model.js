@@ -3,8 +3,6 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var Q = require('q');
 var SALT_WORK_FACTOR = 10;
-var objectId = mongoose.Schema.Types.ObjectId;
-var deal = require('./deal.model.js');
 
 var UserSchema = new Schema({
   username: {
@@ -19,11 +17,8 @@ var UserSchema = new Schema({
   email: {
     type: String,
     required: true
-  },
-  selling: [{type:objectId, ref: 'Deal'}],
-  buying: [{type:objectId, ref: 'Deal'}]
+  }
 });
-
 
 UserSchema.methods.comparePasswords = function (userPassword) {
   var defer = Q.defer();
@@ -60,4 +55,4 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-module.exports = User = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

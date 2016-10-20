@@ -4,10 +4,10 @@
   .config(['$stateProvider', configuration]);
 
   /* @inject */
-  function configuration($stateProvider, authService, $stateParams) {
+  function configuration($stateProvider, authService) {
     $stateProvider
       .state('user', {
-        url: '/user/:id',
+        url: '/user',
         templateUrl: 'scripts/states/user/user.html',
         controller: 'UserController'
       });

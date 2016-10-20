@@ -13,19 +13,11 @@
 
 .title {
     color: #ffffff;
-    font-size: 50px;
+    font-size: 75px;
     line-height: 1;
     letter-spacing: 2px;
     text-align: center;
-    margin-top: 40%;
-    top: 80%;
-    position: relative;
-}
-
-@media (min-width: 430px) {
-  .title{
-    font-size: 75px;
-  }
+    margin-top: 400px;
 }
 
 .tagline {
@@ -34,3 +26,5 @@
     color: #ffffff;
     text-align: right;
 }
+
+
